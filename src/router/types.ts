@@ -1,0 +1,50 @@
+import type { RouteRecordRaw, RouteMeta } from 'vue-router';
+
+export type Component<T = any> =
+  | ReturnType<typeof defineComponent>
+  | (() => Promise<typeof import('*.vue')>)
+  | (() => Promise<T>);
+
+//@ts-ignore
+export type AppRouteRecordRaw = Omit<RouteRecordRaw, 'meta'> & {
+  name: string;
+  meta: RouteMeta;
+  component?: Component | string;
+  components?: Component;
+  children?: AppRouteRecordRaw[];
+  props?: Recordable;
+  fullPath?: string;
+}
+export interface MenuTag {
+  type?: 'primary' | 'error' | 'warn' | 'success';
+  content?: string;
+  dot?: boolean;
+}
+
+export interface Menu {
+  name: string;
+
+  icon?: string;
+
+  path: string;
+
+  // 路径包含参数，自动赋值.
+  paramPath?: string;
+
+  disabled?: boolean;
+
+  children?: Menu[];
+
+  orderNo?: number;
+
+  meta?: Partial<RouteMeta>;
+
+  tag?: MenuTag;
+
+  hideMenu?: boolean;
+}
+
+export interface MenuModule {
+  orderNo?: number;
+  menu: Menu;
+}
