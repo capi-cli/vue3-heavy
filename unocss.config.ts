@@ -30,11 +30,28 @@ export default defineConfig({
     }),
     presetWebFonts({
       fonts: {
-        // sans: 'DM Sans',
-        // serif: 'DM Serif Display',
-        // mono: 'DM Mono',
+        sans: 'DM Sans',
+        serif: 'DM Serif Display',
+        mono: 'DM Mono',
       },
     }),
   ],
+  rules: [
+    [/^letter-spacing-(\d+)$/, ([, d]) => ({ 'letter-spacing': `${d}px` })],
+    [/^w-(\d+)p$/, ([, d]) => ({ width: `${d}%` })],
+  ],
+  theme: {
+    breakpoints: {
+      sm: '640px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      xxl: '1536px',
+      xxxl: '1736px',
+    },
+    colors: {
+      main: '#E70819',
+    },
+  },
   transformers: [transformerDirectives(), transformerVariantGroup()],
 });
